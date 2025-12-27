@@ -7,9 +7,7 @@ import { Menu, X } from "lucide-react"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [isVisible, setIsVisible] = useState(true)
-  const [isScrolledPastHero, setIsScrolledPastHero] = useState(false)
-  const [lastScrollY, setLastScrollY] = useState(0)
+  const [isScrolled, setIsScrolled] = useState(false)
 
   const links = [
     { label: "Home", href: "#" },
@@ -21,36 +19,26 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      const heroHeight = window.innerHeight
-      setIsScrolledPastHero(currentScrollY > heroHeight * 0.8)
-
-      if (currentScrollY < 100) {
-        setIsVisible(true)
-      } else if (currentScrollY > lastScrollY) {
-        setIsVisible(false)
-      } else {
-        setIsVisible(true)
-      }
-
-      setLastScrollY(currentScrollY)
+      setIsScrolled(window.scrollY > 0)
     }
 
-    window.addEventListener("scroll", handleScroll)
+    handleScroll()
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [lastScrollY])
+  }, [])
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-in-out ${
-        isVisible ? "translate-y-0" : "-translate-y-full"
-      } ${isScrolledPastHero ? "bg-white shadow-lg py-2 sm:py-3" : "bg-transparent py-3 sm:py-4 lg:py-6"}`}
+        isScrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-transparent"
+      }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 sm:h-20 lg:h-24">
+        <div className="flex justify-between items-center h-24 py-6">
           {/* Logo */}
           <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
-            <div className="relative w-24 h-14 sm:w-28 sm:h-16 lg:w-32 lg:h-20">
+            <div className="relative w-28 h-16 sm:w-32 sm:h-18 transition-all duration-700">
               <Image src="/logo-Photoroom.png" alt="Free Aqua Logo" fill className="object-contain" priority />
             </div>
           </Link>
@@ -61,7 +49,7 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-sm lg:text-base font-semibold tracking-wide text-gray-800 hover:text-teal-600 transition-colors duration-300 whitespace-nowrap"
+                className="text-sm lg:text-base font-semibold tracking-wide transition-colors duration-300 whitespace-nowrap text-gray-900 hover:text-teal-600"
               >
                 {link.label}
               </Link>

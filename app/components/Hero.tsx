@@ -43,7 +43,7 @@ export default function Hero() {
             Free, clean drinking water for communities, powered by ethical advertising.
           </p>
 
-          <div className="flex justify-center pt-2 sm:pt-4">
+          <div className="flex justify-center pt-2 sm:pt-4 mb-16 sm:mb-20 lg:mb-24">
             <Link
               href="#marketing"
               className="inline-flex items-center gap-2 sm:gap-3 bg-teal-600 hover:bg-teal-700 text-white px-6 sm:px-8 lg:px-10 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
