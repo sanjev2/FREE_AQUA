@@ -44,24 +44,24 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-in-out ${
         isVisible ? "translate-y-0" : "-translate-y-full"
-      } ${isScrolledPastHero ? "bg-white shadow-lg py-3" : "bg-transparent py-6"}`}
+      } ${isScrolledPastHero ? "bg-white shadow-lg py-2 sm:py-3" : "bg-transparent py-3 sm:py-4 lg:py-6"}`}
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
-        <div className="flex justify-between items-center h-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16 sm:h-20 lg:h-24">
           {/* Logo */}
           <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
-            <div className="relative w-32 h-20">
+            <div className="relative w-24 h-14 sm:w-28 sm:h-16 lg:w-32 lg:h-20">
               <Image src="/logo-Photoroom.png" alt="Free Aqua Logo" fill className="object-contain" priority />
             </div>
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex gap-8 items-center">
+          <div className="hidden lg:flex gap-6 xl:gap-8 items-center">
             {links.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-sm font-semibold tracking-wide text-gray-800 hover:text-teal-600 transition-colors duration-300"
+                className="text-sm lg:text-base font-semibold tracking-wide text-gray-800 hover:text-teal-600 transition-colors duration-300 whitespace-nowrap"
               >
                 {link.label}
               </Link>
@@ -69,14 +69,14 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button className="md:hidden p-2 rounded-lg" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
+          <button className="lg:hidden p-2 rounded-lg" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
             {isOpen ? <X size={24} className="text-gray-900" /> : <Menu size={24} className="text-gray-900" />}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden mt-2 bg-white rounded-b-2xl shadow-xl px-4 py-6 space-y-2">
+          <div className="lg:hidden mt-2 bg-white rounded-b-2xl shadow-xl px-4 py-6 space-y-2 animate-in slide-in-from-top">
             {links.map((link) => (
               <Link
                 key={link.label}
