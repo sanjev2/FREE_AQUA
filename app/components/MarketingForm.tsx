@@ -9,6 +9,7 @@ interface FormData {
   lastName: string
   email: string
   contactNumber: string
+  companyName?: string
   message?: string
 }
 
@@ -18,6 +19,7 @@ export default function MarketingForm() {
     lastName: "",
     email: "",
     contactNumber: "",
+    companyName: "",
     message: "",
   })
   const [loading, setLoading] = useState(false)
@@ -61,10 +63,10 @@ export default function MarketingForm() {
         lastName: "",
         email: "",
         contactNumber: "",
+        companyName: "",
         message: "",
       })
 
-      // Reset success message after 5 seconds
       setTimeout(() => setStatus("idle"), 5000)
     } catch (error) {
       setStatus("error")
@@ -76,119 +78,145 @@ export default function MarketingForm() {
   }
 
   return (
-    <section id="marketing" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      <div className="max-w-2xl mx-auto">
-        <div className="bg-white border-2 border-gray-200 rounded-2xl p-8 sm:p-12">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">Marketing & Partnership Request</h2>
-            <p className="text-xl text-teal-600 font-semibold">Free Aqua®</p>
-          </div>
+    <section
+      id="marketing"
+      className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 min-h-screen flex items-center justify-center"
+    >
+      <div className="w-full max-w-4xl">
+        <div className="relative">
+          <div className="absolute -top-4 -left-4 w-8 h-8 border-t-4 border-l-4 border-teal-500"></div>
+          <div className="absolute -top-4 -right-4 w-8 h-8 border-t-4 border-r-4 border-teal-500"></div>
+          <div className="absolute -bottom-4 -left-4 w-8 h-8 border-b-4 border-l-4 border-teal-500"></div>
+          <div className="absolute -bottom-4 -right-4 w-8 h-8 border-b-4 border-r-4 border-teal-500"></div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* First Name */}
-            <div>
-              <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
-                First Name <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors"
-                placeholder="Your first name"
-              />
+          <div className="bg-white rounded-2xl p-10 sm:p-14 shadow-xl">
+            {/* Form Header */}
+            <div className="text-center mb-10">
+              <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">Marketing & Partnership</h2>
+              <p className="text-lg text-gray-600">Request Form</p>
             </div>
 
-            {/* Last Name */}
-            <div>
-              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
-                Last Name <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors"
-                placeholder="Your last name"
-              />
-            </div>
-
-            {/* Email */}
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors"
-                placeholder="your@email.com"
-              />
-            </div>
-
-            {/* Contact Number */}
-            <div>
-              <label htmlFor="contactNumber" className="block text-sm font-medium text-gray-700 mb-2">
-                Contact Number <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="tel"
-                id="contactNumber"
-                name="contactNumber"
-                value={formData.contactNumber}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors"
-                placeholder="+1 (555) 000-0000"
-              />
-            </div>
-
-            {/* Message */}
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                Message <span className="text-gray-400 text-xs">(Optional)</span>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                rows={5}
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors resize-none"
-                placeholder="Tell us about your business and partnership interests..."
-              />
-            </div>
-
-            {/* Status Messages */}
-            {status === "success" && (
-              <div className="bg-green-50 border border-green-300 rounded-lg p-4 text-green-700">
-                ✓ Your request has been sent successfully! We'll contact you soon.
+            <form onSubmit={handleSubmit} className="space-y-8">
+              {/* Name Fields Row */}
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="firstName" className="block text-sm font-semibold text-gray-900 mb-3">
+                    First Name
+                  </label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="lastName" className="block text-sm font-semibold text-gray-900 mb-3">
+                    Last Name
+                  </label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors"
+                  />
+                </div>
               </div>
-            )}
 
-            {status === "error" && (
-              <div className="bg-red-50 border border-red-300 rounded-lg p-4 text-red-700">✗ {errorMessage}</div>
-            )}
+              {/* Email & Contact Row */}
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="email" className="block text-sm font-semibold text-gray-900 mb-3">
+                    Your Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="contactNumber" className="block text-sm font-semibold text-gray-900 mb-3">
+                    Contact
+                  </label>
+                  <input
+                    type="tel"
+                    id="contactNumber"
+                    name="contactNumber"
+                    value={formData.contactNumber}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors"
+                  />
+                </div>
+              </div>
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-teal-600 text-white font-bold py-3 rounded-lg hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? "Sending..." : "Send Request"}
-            </button>
-          </form>
+              {/* Company Name */}
+              <div>
+                <label htmlFor="companyName" className="block text-sm font-semibold text-gray-900 mb-3">
+                  Company Name
+                </label>
+                <input
+                  type="text"
+                  id="companyName"
+                  name="companyName"
+                  value={formData.companyName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors"
+                />
+              </div>
+
+              {/* Message */}
+              <div>
+                <label htmlFor="message" className="block text-sm font-semibold text-gray-900 mb-3">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={6}
+                  className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors resize-none"
+                  placeholder="Tell us how we can help..."
+                />
+              </div>
+
+              {/* Status Messages */}
+              {status === "success" && (
+                <div className="bg-green-50 border border-green-300 rounded-lg p-4 text-green-700 text-sm font-medium">
+                  ✓ Your request has been sent successfully! We'll contact you soon.
+                </div>
+              )}
+
+              {status === "error" && (
+                <div className="bg-red-50 border border-red-300 rounded-lg p-4 text-red-700 text-sm font-medium">
+                  ✗ {errorMessage}
+                </div>
+              )}
+
+              {/* Submit Button */}
+              <div className="flex justify-center pt-4">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="bg-teal-600 text-white font-bold px-12 py-3 rounded-full hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-base shadow-lg hover:shadow-teal-500/20"
+                >
+                  {loading ? "Sending..." : "Let's Connect"}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </section>

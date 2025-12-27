@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Menu, X } from "lucide-react"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
+  const [isScrolledPastHero, setIsScrolledPastHero] = useState(false)
   const [lastScrollY, setLastScrollY] = useState(0)
 
   const links = [
@@ -15,20 +17,19 @@ export default function Navbar() {
     { label: "Advertise With Us", href: "#marketing" },
     { label: "Projects", href: "#coming-soon" },
     { label: "Contact Us", href: "#footer" },
-    { label: "Franchise", href: "#" },
   ]
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
+      const heroHeight = window.innerHeight
+      setIsScrolledPastHero(currentScrollY > heroHeight * 0.8)
 
       if (currentScrollY < 100) {
         setIsVisible(true)
       } else if (currentScrollY > lastScrollY) {
-        // Scrolling down - hide navbar
         setIsVisible(false)
       } else {
-        // Scrolling up - show navbar
         setIsVisible(true)
       }
 
@@ -41,29 +42,26 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/40 to-transparent backdrop-blur-sm transition-transform duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-in-out ${
         isVisible ? "translate-y-0" : "-translate-y-full"
-      }`}
+      } ${isScrolledPastHero ? "bg-white shadow-lg py-3" : "bg-transparent py-6"}`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo Placeholder */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-              <div className="w-11 h-11 bg-gradient-to-br from-cyan-400 to-teal-500 rounded-xl flex items-center justify-center text-white font-bold text-base shadow-lg">
-                FA
-              </div>
-              <span className="hidden sm:inline font-bold text-white text-lg">Free Aqua</span>
-            </Link>
-          </div>
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+        <div className="flex justify-between items-center h-24">
+          {/* Logo */}
+          <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
+            <div className="relative w-32 h-20">
+              <Image src="/logo-Photoroom.png" alt="Free Aqua Logo" fill className="object-contain" priority />
+            </div>
+          </Link>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex gap-10 items-center">
+          <div className="hidden md:flex gap-8 items-center">
             {links.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-white/80 hover:text-white transition-colors text-sm font-medium tracking-wide"
+                className="text-sm font-semibold tracking-wide text-gray-800 hover:text-teal-600 transition-colors duration-300"
               >
                 {link.label}
               </Link>
@@ -71,19 +69,19 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button className="md:hidden p-2" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
-            {isOpen ? <X size={28} className="text-white" /> : <Menu size={28} className="text-white" />}
+          <button className="md:hidden p-2 rounded-lg" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
+            {isOpen ? <X size={24} className="text-gray-900" /> : <Menu size={24} className="text-gray-900" />}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden pb-6 space-y-3 bg-black/50 backdrop-blur-md rounded-b-2xl">
+          <div className="md:hidden mt-2 bg-white rounded-b-2xl shadow-xl px-4 py-6 space-y-2">
             {links.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg text-sm font-medium transition-all"
+                className="block px-4 py-3 text-gray-800 hover:bg-teal-50 hover:text-teal-600 rounded-xl text-base font-medium transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
