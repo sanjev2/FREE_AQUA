@@ -1,35 +1,46 @@
-import type React from "react";
-import type { Metadata } from "next";
-import { GeistSans, GeistMono } from "geist/font";
-import { Analytics } from "@vercel/analytics/next";
-import "./globals.css";
+import type React from "react"
+import type { Metadata } from "next"
+import { Inter, IBM_Plex_Mono } from "next/font/google"
+import { Analytics } from "@vercel/analytics/next"
+import "./globals.css"
 
-// No function calls! Just use .className
+const _inter = Inter({ subsets: ["latin"] })
+const _ibmPlexMono = IBM_Plex_Mono({ weight: ["400", "500", "600", "700"], subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Free Aqua - Free Water Powered by Ethical Advertising",
-  description: "Free, clean drinking water for communities powered by ethical advertising partnerships.",
-  keywords: "water access, clean water, social impact, sustainable marketing, community outreach",
-  openGraph: {
-    title: "Free Aqua - Free Water Powered by Ethical Advertising",
-    description: "Free, clean drinking water for communities powered by ethical advertising partnerships.",
-    type: "website",
+  title: "v0 App",
+  description: "Created with v0",
+  generator: "v0.app",
+  icons: {
+    icon: [
+      {
+        url: "/icon-light-32x32.png",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/icon-dark-32x32.png",
+        media: "(prefers-color-scheme: dark)",
+      },
+      {
+        url: "/icon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+    apple: "/apple-icon.png",
   },
-};
+}
 
-export const viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: "#0d9488",
-};
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
   return (
     <html lang="en">
-      <body className={`${GeistSans.className} ${GeistMono.className} font-sans antialiased`}>
+      <body className={`font-sans antialiased`}>
         {children}
         <Analytics />
       </body>
     </html>
-  );
+  )
 }

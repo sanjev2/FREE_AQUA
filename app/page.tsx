@@ -10,12 +10,22 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
-      <Hero />
+      <section id="home">
+        <Hero />
+      </section>
       <Services />
-      <About />
-      <ComingSoon />
-      <MarketingForm />
-      <Footer />
+      <section id="about">
+        <About />
+      </section>
+      <section id="coming-soon">
+        <ComingSoon />
+      </section>
+      <section id="marketing">
+        <MarketingForm />
+      </section>
+      <section id="footer">
+        <Footer />
+      </section>
     </main>
   )
 }
