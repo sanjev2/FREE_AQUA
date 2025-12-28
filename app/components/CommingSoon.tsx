@@ -34,7 +34,7 @@ export default function ComingSoon() {
           <div className="flex justify-center lg:justify-end">
             <div className="w-full max-w-sm h-80 sm:h-96 bg-gradient-to-br from-blue-200 to-teal-200 rounded-2xl overflow-hidden shadow-lg">
               <img
-                src="/bottled-water-clean-drinking-water-bottles.jpeg"
+                src="/bottles2.png"
                 alt="Community impact"
                 className="w-full h-full object-cover"
               />
