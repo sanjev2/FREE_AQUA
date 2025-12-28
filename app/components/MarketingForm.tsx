@@ -80,7 +80,7 @@ export default function MarketingForm() {
   return (
     <section
       id="marketing"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 min-h-screen flex items-center justify-center"
+      className="py-20 px-4 sm:px-6 lg:px-8 bg-white min-h-screen flex items-center justify-center scroll-mt-24"
     >
       <div className="w-full max-w-4xl">
         <div className="relative">
