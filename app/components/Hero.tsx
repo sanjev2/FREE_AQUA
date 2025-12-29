@@ -1,56 +1,49 @@
 "use client"
 
+import type React from "react"
+
 import { ArrowRight } from "lucide-react"
-import Link from "next/link"
-import { useEffect, useState } from "react"
 
 export default function Hero() {
-  const [bgIndex, setBgIndex] = useState(0)
-
-  // Light, logo-friendly gradients
-  const gradients = [
-    "from-sky-200 via-blue-200 to-cyan-200",
-    "from-blue-100 via-sky-200 to-teal-200",
-    "from-cyan-100 via-blue-200 to-sky-300",
-    "from-teal-100 via-cyan-200 to-blue-200",
-  ]
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setBgIndex((prev) => (prev + 1) % gradients.length)
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [])
+  const handlePartnerClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const element = document.getElementById("marketing")
+    if (element) {
+      element.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      })
+    }
+  }
 
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16">
-      {/* Gradient background */}
-      <div
-        className={`absolute inset-0 bg-gradient-to-br ${gradients[bgIndex]} transition-all duration-1000 ease-in-out`}
-      />
-
-      {/* Soft light overlay */}
-      <div className="absolute inset-0 bg-white/10" />
+      <div className="absolute inset-0 bg-white">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(13,148,136,0.1),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent,rgba(255,255,255,0.8))] z-[1]" />
+        <div className="absolute inset-0 opacity-[0.03] grayscale bg-[url('https://www.transparenttextures.com/patterns/water.png')]" />
+      </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 text-center min-h-[calc(100vh-96px)] sm:min-h-[calc(100vh-112px)] lg:min-h-[calc(100vh-128px)] w-full">
-        <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gray-900 leading-tight tracking-tight px-2">
-            Welcome to Free Aqua
+      <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 text-center min-h-[calc(100vh-160px)] w-full">
+        <div className="max-w-5xl mx-auto space-y-8 sm:space-y-10">
+          <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-zinc-900 leading-[0.85] tracking-tighter">
+            Water is <span className="text-teal-600 italic font-serif">Free</span>.
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed px-4">
-            Free, clean drinking water for communities, powered by ethical advertising.
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-zinc-600 max-w-3xl mx-auto font-medium leading-tight px-4">
+            Clean drinking water for communities, powered by ethical advertising partnerships.
           </p>
 
-          <div className="flex justify-center pt-2 sm:pt-4 mb-16 sm:mb-20 lg:mb-24">
-            <Link
+          <div className="flex justify-center pt-4">
+            <a
               href="#marketing"
-              className="inline-flex items-center gap-2 sm:gap-3 bg-teal-600 hover:bg-teal-700 text-white px-6 sm:px-8 lg:px-10 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+              onClick={handlePartnerClick}
+              /* Upgraded CTA to a stark, bold aesthetic with sharp corners (rounded-sm) and premium transitions */
+              className="inline-flex items-center gap-4 bg-zinc-900 hover:bg-teal-600 text-white px-10 py-5 rounded-sm font-bold text-sm tracking-widest uppercase transition-all duration-500 shadow-2xl hover:shadow-teal-600/20 group"
             >
               Partner With Us
-              <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
-            </Link>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </a>
           </div>
         </div>
       </div>

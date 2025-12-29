@@ -8,11 +8,7 @@ export default function About() {
           {/* Image */}
           <div className="flex justify-center lg:justify-start">
             <div className="w-full max-w-sm h-96 bg-gradient-to-br from-gray-300 to-gray-400 rounded-xl overflow-hidden shadow-lg">
-              <img
-                src="/download.jpeg"
-                alt="Free Aqua branded bottle"
-                className="w-full h-full object-cover"
-              />
+              <img src="/download.jpeg" alt="Free Aqua branded bottle" className="w-full h-full object-cover" />
             </div>
           </div>
 

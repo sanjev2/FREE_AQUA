@@ -3,10 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-html {
-  scroll-behavior: smooth;
-}
-
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -79,7 +75,7 @@ html {
 }
 
 @theme inline {
-  /* Updated to use Inter and IBM Plex Mono for professional, modern aesthetic */
+  /* Updated fonts to Inter and IBM Plex Mono for a modern, enterprise aesthetic */
   --font-sans: "Inter", "Inter Fallback", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", "IBM Plex Mono Fallback", monospace;
   --color-background: var(--background);

@@ -1,12 +1,35 @@
+"use client"
+
+import type React from "react"
+
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube } from "lucide-react"
 
 export default function Footer() {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const href = e.currentTarget.getAttribute("href")
+    if (href?.startsWith("#")) {
+      e.preventDefault()
+      const id = href === "#partner" ? "marketing" : href.replace("#", "")
+      const element = document.getElementById(id)
+      if (element) {
+        element.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        })
+      } else if (href === "#home") {
+        window.scrollTo({
+          top: 0,
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        })
+      }
+    }
+  }
+
   return (
     <footer id="footer" className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 text-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-12 lg:py-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
             {/* Company Info */}
             <div className="space-y-4">
               <h3 className="text-2xl font-bold bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
@@ -35,6 +58,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
+                      onClick={handleNavClick}
                       className="text-gray-400 hover:text-teal-400 transition-colors text-sm inline-block"
                     >
                       {link.label}

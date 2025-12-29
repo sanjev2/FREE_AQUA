@@ -27,30 +27,47 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white max-w-7xl mx-auto scroll-mt-24">
-      <div className="text-center mb-16">
-        <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4 text-balance">Our Services</h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          We're combining a critical social mission with sustainable business opportunity for all stakeholders.
-        </p>
-      </div>
+    <section id="services" className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-zinc-50 scroll-mt-24">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+          <div className="max-w-2xl">
+            <span className="text-teal-600 font-bold tracking-[0.2em] uppercase text-xs mb-4 block">Our Impact</span>
+            <h2 className="text-4xl sm:text-6xl font-black text-zinc-900 leading-[0.9] tracking-tighter">
+              Social Mission Meets <br />
+              Sustainable Growth
+            </h2>
+          </div>
+          <p className="text-lg text-zinc-500 max-w-sm font-medium leading-relaxed italic border-l-2 border-teal-600 pl-6">
+            We're building a future where business growth directly fuels universal water access.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {services.map((service, index) => {
-          const Icon = service.icon
-          return (
-            <div
-              key={index}
-              className="bg-gray-50 border border-gray-200 rounded-2xl p-8 hover:border-teal-300 hover:shadow-lg transition-all"
-            >
-              <div className="mb-4">
-                <Icon className="w-12 h-12 text-teal-600" strokeWidth={1.5} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {services.map((service, index) => {
+            const Icon = service.icon
+            return (
+              <div
+                key={index}
+                className="group bg-white border border-zinc-200 p-8 hover:bg-zinc-900 hover:border-zinc-900 transition-all duration-500 min-h-[320px] flex flex-col"
+              >
+                <div className="mb-auto">
+                  <Icon
+                    className="w-8 h-8 text-teal-600 group-hover:text-white transition-colors duration-500"
+                    strokeWidth={1.5}
+                  />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-zinc-900 group-hover:text-white mb-3 transition-colors duration-500 tracking-tight">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm text-zinc-500 group-hover:text-zinc-400 transition-colors duration-500 leading-relaxed font-medium">
+                    {service.description}
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3 uppercase tracking-wide">{service.title}</h3>
-              <p className="text-gray-600 leading-relaxed">{service.description}</p>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
     </section>
   )

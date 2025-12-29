@@ -33,11 +33,7 @@ export default function ComingSoon() {
           {/* Image */}
           <div className="flex justify-center lg:justify-end">
             <div className="w-full max-w-sm h-80 sm:h-96 bg-gradient-to-br from-blue-200 to-teal-200 rounded-2xl overflow-hidden shadow-lg">
-              <img
-                src="/bottles2.png"
-                alt="Community impact"
-                className="w-full h-full object-cover"
-              />
+              <img src="/bottles2.png" alt="Community impact" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>

@@ -48,13 +48,17 @@ export default function Navbar() {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const href = e.currentTarget.getAttribute("href")
     if (href?.startsWith("#")) {
-      // Generic smooth scroll handler
       e.preventDefault()
       const element = document.querySelector(href)
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" })
+        element.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        })
       } else if (href === "#home") {
-        window.scrollTo({ top: 0, behavior: "smooth" })
+        window.scrollTo({
+          top: 0,
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        })
       }
       setIsOpen(false)
     }
@@ -63,11 +67,11 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-transparent"
+        isScrolled ? "bg-white/80 backdrop-blur-xl border-b border-zinc-200/50 shadow-sm" : "bg-transparent"
       } ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-24 py-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20 sm:h-24 py-4 sm:py-6">
           {/* Logo */}
           <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
             <div className="relative w-28 h-16 sm:w-32 sm:h-18">
@@ -76,13 +80,13 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden lg:flex gap-6 xl:gap-8 items-center">
+          <div className="hidden lg:flex gap-8 xl:gap-10 items-center">
             {links.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
                 onClick={handleNavClick}
-                className="text-sm lg:text-base font-semibold tracking-wide transition-colors duration-300 whitespace-nowrap text-gray-900 hover:text-teal-600"
+                className="text-[11px] font-black tracking-[0.2em] uppercase transition-colors duration-300 whitespace-nowrap text-zinc-900 hover:text-teal-600"
               >
                 {link.label}
               </Link>

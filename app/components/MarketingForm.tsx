@@ -78,29 +78,56 @@ export default function MarketingForm() {
   }
 
   return (
-    <section
-      id="marketing"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-white min-h-screen flex items-center justify-center scroll-mt-24"
-    >
-      <div className="w-full max-w-4xl">
-        <div className="relative">
-          <div className="absolute -top-4 -left-4 w-8 h-8 border-t-4 border-l-4 border-teal-500"></div>
-          <div className="absolute -top-4 -right-4 w-8 h-8 border-t-4 border-r-4 border-teal-500"></div>
-          <div className="absolute -bottom-4 -left-4 w-8 h-8 border-b-4 border-l-4 border-teal-500"></div>
-          <div className="absolute -bottom-4 -right-4 w-8 h-8 border-b-4 border-r-4 border-teal-500"></div>
+    <section id="marketing" className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-white scroll-mt-24">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
+          <div>
+            <span className="text-teal-600 font-bold tracking-[0.2em] uppercase text-xs mb-4 block">Let's Connect</span>
+            <h2 className="text-4xl sm:text-6xl font-black text-zinc-900 mb-8 leading-[0.9] tracking-tighter">
+              Partner With <br />
+              Free Aqua
+            </h2>
+            <p className="text-xl text-zinc-500 leading-relaxed font-medium mb-12">
+              Transform your marketing budget into social impact. Join our network of ethical brands today.
+            </p>
 
-          <div className="bg-white rounded-2xl p-10 sm:p-14 shadow-xl">
-            {/* Form Header */}
-            <div className="text-center mb-10">
-              <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">Marketing & Partnership</h2>
-              <p className="text-lg text-gray-600">Request Form</p>
+            <div className="space-y-8">
+              {[
+                { label: "Global Reach", desc: "Connect with millions through purpose-driven placement." },
+                { label: "Impact Verified", desc: "Transparent reporting on every drop distributed." },
+              ].map((item, i) => (
+                <div key={i} className="flex gap-6 items-start">
+                  <div className="w-12 h-12 bg-zinc-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="font-bold text-zinc-900 text-xs">{String(i + 1).padStart(2, "0")}</span>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-zinc-900 mb-1">{item.label}</h4>
+                    <p className="text-zinc-500 text-sm font-medium">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative bg-zinc-50 border border-zinc-200 p-8 sm:p-12 rounded-sm overflow-visible">
+            {/* Top Right */}
+            <div className="absolute -top-1 -right-1 w-8 h-8 pointer-events-none">
+              <div className="absolute top-0 right-0 w-[2px] h-full bg-gradient-to-b from-teal-600 to-transparent" />
+              <div className="absolute top-0 right-0 h-[2px] w-full bg-gradient-to-l from-teal-600 to-transparent" />
+            </div>
+            {/* Bottom Left */}
+            <div className="absolute -bottom-1 -left-1 w-8 h-8 pointer-events-none">
+              <div className="absolute bottom-0 left-0 w-[2px] h-full bg-gradient-to-t from-teal-600 to-transparent" />
+              <div className="absolute bottom-0 left-0 h-[2px] w-full bg-gradient-to-r from-teal-600 to-transparent" />
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-8">
-              {/* Name Fields Row */}
-              <div className="grid grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="firstName" className="block text-sm font-semibold text-gray-900 mb-3">
+            <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label
+                    htmlFor="firstName"
+                    className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400"
+                  >
                     First Name
                   </label>
                   <input
@@ -110,11 +137,11 @@ export default function MarketingForm() {
                     value={formData.firstName}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors"
+                    className="w-full px-0 py-2 bg-transparent border-b border-zinc-300 focus:border-teal-600 focus:outline-none transition-all text-zinc-900 font-medium placeholder:text-zinc-300"
                   />
                 </div>
-                <div>
-                  <label htmlFor="lastName" className="block text-sm font-semibold text-gray-900 mb-3">
+                <div className="space-y-2">
+                  <label htmlFor="lastName" className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400">
                     Last Name
                   </label>
                   <input
@@ -124,15 +151,14 @@ export default function MarketingForm() {
                     value={formData.lastName}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors"
+                    className="w-full px-0 py-2 bg-transparent border-b border-zinc-300 focus:border-teal-600 focus:outline-none transition-all text-zinc-900 font-medium placeholder:text-zinc-300"
                   />
                 </div>
               </div>
 
-              {/* Email & Contact Row */}
-              <div className="grid grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-gray-900 mb-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label htmlFor="email" className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400">
                     Your Email
                   </label>
                   <input
@@ -142,11 +168,14 @@ export default function MarketingForm() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors"
+                    className="w-full px-0 py-2 bg-transparent border-b border-zinc-300 focus:border-teal-600 focus:outline-none transition-all text-zinc-900 font-medium placeholder:text-zinc-300"
                   />
                 </div>
-                <div>
-                  <label htmlFor="contactNumber" className="block text-sm font-semibold text-gray-900 mb-3">
+                <div className="space-y-2">
+                  <label
+                    htmlFor="contactNumber"
+                    className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400"
+                  >
                     Contact
                   </label>
                   <input
@@ -156,14 +185,16 @@ export default function MarketingForm() {
                     value={formData.contactNumber}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors"
+                    className="w-full px-0 py-2 bg-transparent border-b border-zinc-300 focus:border-teal-600 focus:outline-none transition-all text-zinc-900 font-medium placeholder:text-zinc-300"
                   />
                 </div>
               </div>
 
-              {/* Company Name */}
-              <div>
-                <label htmlFor="companyName" className="block text-sm font-semibold text-gray-900 mb-3">
+              <div className="space-y-2">
+                <label
+                  htmlFor="companyName"
+                  className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400"
+                >
                   Company Name
                 </label>
                 <input
@@ -172,13 +203,12 @@ export default function MarketingForm() {
                   name="companyName"
                   value={formData.companyName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors"
+                  className="w-full px-0 py-2 bg-transparent border-b border-zinc-300 focus:border-teal-600 focus:outline-none transition-all text-zinc-900 font-medium placeholder:text-zinc-300"
                 />
               </div>
 
-              {/* Message */}
-              <div>
-                <label htmlFor="message" className="block text-sm font-semibold text-gray-900 mb-3">
+              <div className="space-y-2">
+                <label htmlFor="message" className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400">
                   Message
                 </label>
                 <textarea
@@ -187,7 +217,7 @@ export default function MarketingForm() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={6}
-                  className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition-colors resize-none"
+                  className="w-full px-0 py-2 bg-transparent border-b border-zinc-300 focus:border-teal-600 focus:outline-none transition-all text-zinc-900 font-medium placeholder:text-zinc-300 resize-none"
                   placeholder="Tell us how we can help..."
                 />
               </div>
