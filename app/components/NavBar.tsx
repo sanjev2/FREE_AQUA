@@ -70,7 +70,7 @@ export default function Navbar() {
         isScrolled ? "bg-white/80 backdrop-blur-xl border-b border-zinc-200/50 shadow-sm" : "bg-transparent"
       } ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12">
         <div className="flex justify-between items-center h-20 sm:h-24 py-4 sm:py-6">
           {/* Logo */}
           <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
