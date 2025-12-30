@@ -40,8 +40,8 @@ export default function Navbar() {
     { label: "Home", href: "#home" },
     { label: "Services", href: "#services" }, // Added Services link
     { label: "Our Story", href: "#about" },
-    { label: "Advertise With Us", href: "#marketing" },
     { label: "Projects", href: "#coming-soon" },
+    { label: "Advertise With Us", href: "#marketing" },
     { label: "Contact Us", href: "#footer" },
   ]
 
