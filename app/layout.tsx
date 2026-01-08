@@ -1,15 +1,16 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, IBM_Plex_Mono } from "next/font/google"
+import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const _inter = Inter({ subsets: ["latin"] })
-const _ibmPlexMono = IBM_Plex_Mono({ weight: ["400", "500", "600", "700"], subsets: ["latin"] })
+const _geist = Geist({ subsets: ["latin"] })
+const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
+  title: "Free Aqua - Clean Water for All Communities",
+  description:
+    "Free Aqua: Providing clean drinking water to communities worldwide through ethical advertising partnerships that create social impact.",
   generator: "v0.app",
   icons: {
     icon: [
@@ -37,6 +38,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="theme-color" content="#0d9488" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+      </head>
       <body className={`font-sans antialiased`}>
         {children}
         <Analytics />

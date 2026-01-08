@@ -1,8 +1,8 @@
 "use client"
 
 import type React from "react"
-
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube } from "lucide-react"
+import { motion } from "framer-motion"
 
 export default function Footer() {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -24,28 +24,64 @@ export default function Footer() {
     }
   }
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6 },
+    },
+  }
+
   return (
-    <footer id="footer" className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 text-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer
+      id="footer"
+      className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden"
+    >
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-gradient-to-bl from-teal-500/10 to-transparent rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-gradient-to-tr from-cyan-500/10 to-transparent rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main Footer Content */}
-        <div className="py-12 lg:py-16">
+        <motion.div
+          className="py-12 lg:py-16"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
             {/* Company Info */}
-            <div className="space-y-4">
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
+            <motion.div variants={itemVariants} className="space-y-4">
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-teal-400 via-cyan-400 to-teal-300 bg-clip-text text-transparent tracking-tight">
                 Free Aqua
               </h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
+              <p className="text-gray-400 text-sm leading-relaxed font-medium">
                 Providing free, clean drinking water to communities worldwide through ethical advertising partnerships.
               </p>
-              <div className="flex items-start gap-2 text-sm text-gray-400">
-                <MapPin size={16} className="text-teal-400 flex-shrink-0 mt-1" />
+              <div className="flex items-start gap-2 text-sm text-gray-400 hover:text-teal-400 transition-colors group cursor-pointer">
+                <MapPin
+                  size={16}
+                  className="text-teal-400 flex-shrink-0 mt-1 group-hover:scale-110 transition-transform"
+                />
                 <span>123 Water Street, Clean City, CA 90210</span>
               </div>
-            </div>
+            </motion.div>
 
             {/* Quick Links */}
-            <div className="space-y-4">
+            <motion.div variants={itemVariants} className="space-y-4">
               <h4 className="font-semibold text-lg text-white">Quick Links</h4>
               <ul className="space-y-3">
                 {[
@@ -55,47 +91,58 @@ export default function Footer() {
                   { label: "Partner With Us", href: "#partner" },
                   { label: "Blog & News", href: "#blog" },
                 ].map((link) => (
-                  <li key={link.label}>
+                  <motion.li key={link.label} whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
                     <a
                       href={link.href}
                       onClick={handleNavClick}
-                      className="text-gray-400 hover:text-teal-400 transition-colors text-sm inline-block"
+                      className="text-gray-400 hover:text-teal-400 transition-colors text-sm inline-block group"
                     >
                       {link.label}
+                      <span className="block w-0 group-hover:w-full h-0.5 bg-gradient-to-r from-teal-400 to-cyan-300 transition-all duration-300" />
                     </a>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
-            <div className="space-y-4 sm:col-span-2 lg:col-span-1">
+            {/* Connect With Us */}
+            <motion.div variants={itemVariants} className="space-y-4 sm:col-span-2 lg:col-span-1">
               <h4 className="font-semibold text-lg text-white">Connect With Us</h4>
 
               {/* Contact Info */}
               <div className="space-y-4">
-                <a
-                  href="tel:+1234567890"
-                  className="flex items-center gap-3 text-gray-400 hover:text-teal-400 transition-colors group"
-                >
-                  <div className="w-9 h-9 bg-gray-800 rounded-lg flex items-center justify-center group-hover:bg-teal-600 transition-colors">
-                    <Phone size={16} className="text-teal-400 group-hover:text-white" />
-                  </div>
-                  <span className="text-sm">+1 (234) 567-890</span>
-                </a>
-                <a
-                  href="mailto:hello@freeaqua.com"
-                  className="flex items-center gap-3 text-gray-400 hover:text-teal-400 transition-colors group"
-                >
-                  <div className="w-9 h-9 bg-gray-800 rounded-lg flex items-center justify-center group-hover:bg-teal-600 transition-colors">
-                    <Mail size={16} className="text-teal-400 group-hover:text-white" />
-                  </div>
-                  <span className="text-sm">hello@freeaqua.com</span>
-                </a>
+                {[
+                  {
+                    Icon: Phone,
+                    href: "tel:+1234567890",
+                    label: "+1 (234) 567-890",
+                  },
+                  {
+                    Icon: Mail,
+                    href: "mailto:hello@freeaqua.com",
+                    label: "hello@freeaqua.com",
+                  },
+                ].map(({ Icon, href, label }) => (
+                  <motion.a
+                    key={label}
+                    href={href}
+                    whileHover={{ x: 4 }}
+                    className="flex items-center gap-3 text-gray-400 hover:text-teal-400 transition-colors group"
+                  >
+                    <motion.div
+                      className="w-10 h-10 bg-slate-700/50 border border-slate-600 rounded-lg flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-teal-600 group-hover:to-cyan-600 group-hover:border-teal-500 transition-all duration-300"
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      <Icon size={16} className="text-teal-400 group-hover:text-white transition-colors" />
+                    </motion.div>
+                    <span className="text-sm">{label}</span>
+                  </motion.a>
+                ))}
               </div>
 
               {/* Social Media */}
               <div className="pt-2">
-                <p className="text-sm text-gray-400 mb-3">Follow us on social media</p>
+                <p className="text-sm text-gray-400 mb-3 font-medium">Follow us on social media</p>
                 <div className="flex items-center gap-3 flex-wrap">
                   {[
                     { Icon: Facebook, href: "#facebook", label: "Facebook" },
@@ -104,29 +151,37 @@ export default function Footer() {
                     { Icon: Linkedin, href: "#linkedin", label: "LinkedIn" },
                     { Icon: Youtube, href: "#youtube", label: "YouTube" },
                   ].map(({ Icon, href, label }) => (
-                    <a
+                    <motion.a
                       key={label}
                       href={href}
                       aria-label={label}
-                      className="w-9 h-9 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-teal-600 transition-all duration-300 hover:scale-110"
+                      whileHover={{ scale: 1.15, y: -4 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-10 h-10 bg-slate-700/50 border border-slate-600 rounded-lg flex items-center justify-center hover:bg-gradient-to-br hover:from-teal-600 hover:to-cyan-600 hover:border-teal-500 transition-all duration-300 hover:shadow-lg hover:shadow-teal-500/20"
                     >
                       <Icon size={16} />
-                    </a>
+                    </motion.a>
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Divider */}
-        <div className="border-t border-gray-800" />
+        <div className="border-t border-slate-700/50" />
 
-        <div className="py-6">
-          <p className="text-gray-400 text-sm text-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="py-6"
+        >
+          <p className="text-gray-400 text-sm text-center font-medium">
             © 2025 Free Aqua. All rights reserved. Built with purpose for positive impact.
           </p>
-        </div>
+        </motion.div>
       </div>
     </footer>
   )
