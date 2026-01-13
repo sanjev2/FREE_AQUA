@@ -4,7 +4,6 @@ import React from "react"
 import { ArrowRight } from "lucide-react"
 import { motion, Variants } from "framer-motion"
 
-// Animation Variants
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -67,10 +66,10 @@ export default function Hero() {
         <div className="max-w-5xl mx-auto space-y-8 sm:space-y-10">
           <motion.h1
             variants={itemVariants}
-            className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-zinc-900 leading-[0.85] tracking-tighter"
-          >
+            className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-zinc-900 leading-[1.1] sm:leading-[0.9] tracking-tighter"
+>
             Water is{" "}
-            <span className="bg-gradient-to-r from-teal-600 via-cyan-500 to-teal-600 bg-clip-text text-transparent italic font-serif drop-shadow-lg">
+            <span className="relative inline-block px-2 bg-gradient-to-r from-teal-600 via-cyan-500 to-teal-600 bg-clip-text text-transparent italic font-serif drop-shadow-lg">
               Free
             </span>
             .
